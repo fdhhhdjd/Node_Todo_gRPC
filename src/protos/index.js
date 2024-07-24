@@ -1,5 +1,5 @@
-const protoLoader = require("@grpc/proto-loader");
 const grpc = require("@grpc/grpc-js");
+const protoLoader = require("@grpc/proto-loader");
 const path = require("path");
 
 const userProtoPath = path.join(__dirname, "user.proto");
@@ -26,4 +26,14 @@ const todoPackageDef = protoLoader.loadSync(todoProtoPath, {
 const userProto = grpc.loadPackageDefinition(userPackageDef).user;
 const todoProto = grpc.loadPackageDefinition(todoPackageDef).todo;
 
-module.exports = { userProto, todoProto };
+const userClient = new userProto.UserService(
+  "localhost:50051",
+  grpc.credentials.createInsecure(),
+);
+
+const todoClient = new todoProto.TodoService(
+  "localhost:50052",
+  grpc.credentials.createInsecure(),
+);
+
+module.exports = { userProto, todoProto, userClient, todoClient };

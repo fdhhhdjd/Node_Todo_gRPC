@@ -1,10 +1,17 @@
+const { BadRequestResponse } = require("@/cors/error.response");
+const { userClient } = require("@/protos");
+
 class UserServices {
   async getUserProfile({ id }) {
-    return {
-      id: id || 1,
-      name: "Tai Tien Nguyen 1112",
-      age: 24,
-    };
+    return new Promise((resolve, reject) => {
+      userClient.GetUser({ id }, (err, response) => {
+        if (!err) {
+          resolve(response.user);
+        } else {
+          reject(new BadRequestResponse({ details: err }));
+        }
+      });
+    });
   }
 }
 

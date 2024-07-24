@@ -5,16 +5,20 @@ const { appConstants } = require("@/constants");
 require("dotenv").config();
 
 const DEV = {
-  grpc: {
-    port: process.env.GRPC_PORT,
-    node: process.env.NODE_ENV || appConstants.NODE_ENVS[0],
+  userGRPC: {
+    port: process.env.USER_GRPC_PORT,
+  },
+  todoGRPC: {
+    port: process.env.TODO_GRPC_PORT,
   },
 };
 
 const PROD = {
-  grpc: {
-    port: process.env.GRPC_PORT,
-    node: process.env.NODE_ENV || appConstants.NODE_ENVS[1],
+  userGRPC: {
+    port: process.env.USER_GRPC_PORT,
+  },
+  todoGRPC: {
+    port: process.env.TODO_GRPC_PORT,
   },
 };
 

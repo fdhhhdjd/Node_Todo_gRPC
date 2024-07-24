@@ -1,16 +1,16 @@
 //* LIB
-const express = require('express');
-const compression = require('compression');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const helmet = require('helmet').default;
-const morgan = require('morgan');
+const express = require("express");
+const compression = require("compression");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const helmet = require("helmet").default;
+const morgan = require("morgan");
 
-require('dotenv').config();
+require("dotenv").config();
 
 //* REQUIRE
-const { ErrorCustom } = require('@/utils');
-const { appHelpers } = require('@/helpers');
+const { ErrorCustom } = require("@/utils");
+const { appHelpers } = require("@/helpers");
 
 //* USED LIB
 const app = express();
@@ -28,17 +28,17 @@ app.use(
 );
 
 //* GLOBAL
-require('@/globals');
+require("@/globals");
 
 //* GROUP VERSION
 const apiRouter = express.Router();
 
-const v1Router = require('@/app/v1/routes');
+const v1Router = require("@/app/v1/routes");
 
-apiRouter.use('/v1', v1Router);
+apiRouter.use("/v1", v1Router);
 
 //* ROUTES
-app.use('/api', apiRouter);
+app.use("/api", apiRouter);
 
 //* NOT FOUND 404
 app.use(ErrorCustom.notFoundHandler);

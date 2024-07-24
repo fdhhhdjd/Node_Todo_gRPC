@@ -1,10 +1,10 @@
 const express = require("express");
 
-const userControllers = require("@/app/v1/controllers/userControllers");
 const { AsyncHandler } = require("@/utils");
+const todoControllers = require("@/app/v1/controllers/todoControllers");
 
 const router = express.Router();
 
-router.get("/:userId", AsyncHandler(userControllers.GetUserDetail));
+router.get("/:todoId", AsyncHandler(todoControllers.getTodoDetail));
 
 module.exports = router;

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "DEBUG=ioredis:* node --watch server.js",
-    "grpc": "node --watch src/grpc/",
+    "user": "node --watch  src/grpc/userGRPC.js",
+    "todo": "node --watch  src/grpc/todoGRPC.js",
     "format": "prettier --write src/**/*.{js,jsx}",
     "prepare": "husky install",
     "pre-commit": "echo \"[Husky] pre-commit\"",
@@ -58,8 +59,7 @@
     "helmet": "^7.1.0",
     "module-alias": "^2.2.3",
     "pg": "^8.12.0",
-    "sequelize": "^6.37.3",
-    "winston": "^3.13.1"
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
