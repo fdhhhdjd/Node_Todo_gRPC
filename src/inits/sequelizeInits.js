@@ -24,9 +24,30 @@ class DatabaseManager {
     try {
       await this.client.instanceConnect.authenticate();
       console.info("CONNECTED TO POSTGRESQL SUCCESS 🐘 !!");
+
+      await this.syncDatabase();
     } catch (err) {
       console.error("Failed to connect to PostgreSQL database", err);
       this.handleTimeoutError();
+    }
+  }
+
+  async syncDatabase() {
+    try {
+      const User = require("@/app/v1/models/orm/userORM")(
+        this.client.instanceConnect,
+      );
+      const Todo = require("@/app/v1/models/orm/todoORM")(
+        this.client.instanceConnect,
+      );
+
+      User.associate({ Todo });
+      Todo.associate({ User });
+
+      await this.client.instanceConnect.sync({ force: false }); // 'force: false' keep data old
+      console.info("Database & tables created!");
+    } catch (error) {
+      console.error("Unable to sync the database:", error);
     }
   }
 
@@ -48,7 +69,8 @@ class DatabaseManager {
         idle: timeConstants._30_SECONDS,
       },
       logging: appHelpers.isNodeEnvMatch(appConstants.NODE_ENVS[0])
-        ? console.log
+        ? // ? console.log
+          false
         : false,
     });
 
