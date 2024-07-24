@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "DEBUG=ioredis:* node --watch server.js",
+    "grpc": "node --watch src/grpc/",
     "format": "prettier --write src/**/*.{js,jsx}",
     "prepare": "husky install",
     "pre-commit": "echo \"[Husky] pre-commit\"",
@@ -47,6 +48,7 @@
     "@": "src"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.11.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
