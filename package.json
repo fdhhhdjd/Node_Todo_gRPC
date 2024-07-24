@@ -58,7 +58,8 @@
     "helmet": "^7.1.0",
     "module-alias": "^2.2.3",
     "pg": "^8.12.0",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "winston": "^3.13.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
