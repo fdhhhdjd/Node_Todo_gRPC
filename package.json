@@ -1,0 +1,69 @@
+{
+  "name": "node-todo-grpc",
+  "version": "1.0.0",
+  "description": "this is source code todo grpc",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "DEBUG=ioredis:* node --watch server.js",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "prepare": "husky install",
+    "pre-commit": "echo \"[Husky] pre-commit\"",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "npm run format"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "commitlint": {
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        130
+      ]
+    },
+    "extends": [
+      "./commitlint.config.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/class-fullstack/class-service-users"
+  },
+  "keywords": [
+    "service",
+    "users"
+  ],
+  "author": "nguyentientai10@gmail.com",
+  "license": "ISC",
+  "_moduleAliases": {
+    "@": "src"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "module-alias": "^2.2.3",
+    "pg": "^8.12.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "morgan": "^1.10.0",
+    "prettier": "^3.3.2"
+  }
+}

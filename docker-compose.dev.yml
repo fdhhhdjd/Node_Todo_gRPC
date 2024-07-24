@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  service_users:
+    container_name: service_users
+    restart: always
+    build:
+      dockerfile: ./docker/dev/Dockerfile.dev
+      context: .
+    environment:
+      - NODE_ENV=dev
+    env_file:
+      - .env
+    ports:
+      - '${PORT}:${PORT}'
+    volumes:
+      - './src:/usr/src/app/src'
