@@ -8,11 +8,9 @@ class UserModels {
     this.User = require("@/app/v1/models/orm/userORM")(initPg.getDatabase());
   }
   async createUser(data) {
-    try {
-      return await this.User.create(data);
-    } catch (error) {
-      return ErrorHandlerPg.handlePostgresError(error);
-    }
+    return this.User.create(data).catch((error) =>
+      ErrorHandlerPg.handlePostgresError(error),
+    );
   }
 }
 

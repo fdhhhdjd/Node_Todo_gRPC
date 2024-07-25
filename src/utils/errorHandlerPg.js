@@ -1,3 +1,4 @@
+const { InvalidArgumentGRPC } = require("@/cors");
 const responseCodesPG = require("./codes/errorCodePg");
 const errorReasonsPG = require("./codes/errorReasonsPg");
 
@@ -10,12 +11,16 @@ class ErrorHandlerPG {
     );
     const reason = errorReasonsPG[code] || "Unknown error";
 
+    console.log({
+      code,
+      description,
+      reason,
+    });
+
     if (description) {
-      return {
-        code,
-        description,
-        reason,
-      };
+      throw new InvalidArgumentGRPC({
+        message: description,
+      });
     }
     return {
       code,
