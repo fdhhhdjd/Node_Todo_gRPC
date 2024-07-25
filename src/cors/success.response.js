@@ -1,4 +1,4 @@
-const statusCodes = require("@/utils/statusCodes");
+const statusCodes = require("@/utils/codes/statusCodes");
 
 class SuccessResponse {
   constructor({ message, status, metadata = {} }) {

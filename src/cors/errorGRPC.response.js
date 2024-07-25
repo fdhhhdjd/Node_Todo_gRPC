@@ -1,5 +1,5 @@
-const errorCodes = require("@/utils/errorCodeGRPC");
-const statusCodes = require("@/utils/statusCodes");
+const errorCodes = require("@/utils/codes/errorCodeGRPC");
+const statusCodes = require("@/utils/codes/statusCodes");
 
 class ErrorResponse extends Error {
   constructor(message, code, status) {
@@ -9,7 +9,17 @@ class ErrorResponse extends Error {
   }
 }
 
-class NotFoundResponse extends ErrorResponse {
+class InvalidArgumentGRPC extends ErrorResponse {
+  constructor({
+    message = errorCodes.INVALID_ARGUMENT.message,
+    code = errorCodes.INVALID_ARGUMENT.code,
+    status = statusCodes.BAD_REQUEST,
+  } = {}) {
+    super(message, status, code);
+  }
+}
+
+class NotFoundGRPC extends ErrorResponse {
   constructor({
     message = errorCodes.NOT_FOUND.message,
     code = errorCodes.NOT_FOUND.code,
@@ -20,5 +30,6 @@ class NotFoundResponse extends ErrorResponse {
 }
 
 module.exports = {
-  NotFoundResponse,
+  NotFoundGRPC,
+  InvalidArgumentGRPC,
 };

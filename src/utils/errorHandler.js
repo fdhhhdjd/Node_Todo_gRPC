@@ -1,6 +1,6 @@
-const { NotFound } = require('@/cors');
-const statusCodes = require('./statusCodes');
-const reasonPhrases = require('./reasonPhrases');
+const { NotFound } = require("@/cors");
+const statusCodes = require("./codes/statusCodes");
+const reasonPhrases = require("./codes/reasonPhrases");
 
 const notFoundHandler = (_, __, next) => {
   const error = new NotFound();
@@ -21,7 +21,7 @@ const errorHandler = (error, __, res, ____) => {
     details: errorDetails,
     timestamp: errorTime,
   };
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === "dev") {
     response.stack = error.stack;
   }
 

@@ -1,6 +1,6 @@
-const reasonPhrases = require("@/utils/reasonPhrases");
-const statusCodes = require("@/utils/statusCodes");
-const errorCodes = require("@/utils/errorCode");
+const reasonPhrases = require("@/utils/codes/reasonPhrases");
+const statusCodes = require("@/utils/codes/statusCodes");
+const errorCodes = require("@/utils/codes/errorCode");
 const { checkStringHelpers } = require("@/helpers");
 
 class ErrorResponse extends Error {

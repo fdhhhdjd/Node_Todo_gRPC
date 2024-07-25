@@ -11,5 +11,6 @@ module.exports = {
   NotFound: require("./error.response").NotFoundError,
 
   // Todo: --------- GRPC ---------
-  NotFoundGRPC: require("./errorGRPC.response").NotFoundResponse,
+  NotFoundGRPC: require("./errorGRPC.response").NotFoundGRPC,
+  InvalidArgumentGRPC: require("./errorGRPC.response").InvalidArgumentGRPC,
 };

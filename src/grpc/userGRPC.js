@@ -1,13 +1,16 @@
 require("module-alias/register");
 
 const grpc = require("@grpc/grpc-js");
+
 const {
   grpcConfigs: {
     userGRPC: { port },
   },
 } = require("@/configs");
-const userService = require("./services/userServices");
 const { userProto } = require("@/protos");
+
+//* GLOBAL
+require("@/globals");
 
 const userGRPCServer = new grpc.Server({
   "grpc.max_send_message_length": -1,
@@ -15,7 +18,10 @@ const userGRPCServer = new grpc.Server({
 });
 
 // Add user service with interceptor
-userGRPCServer.addService(userProto.UserService.service, userService);
+userGRPCServer.addService(
+  userProto.UserService.service,
+  require("./services/userServices"),
+);
 
 // Start the server
 userGRPCServer.bindAsync(

@@ -1,5 +1,5 @@
-const { NotFoundGRPC } = require("@/cors");
-const { NotFoundResponse } = require("@/cors/errorGRPC.response");
+const userModels = require("@/app/v1/models/userModels");
+const { InvalidArgumentGRPC } = require("@/cors");
 const { ErrorHandlerGRPC } = require("@/utils");
 
 class UserServices {
@@ -23,9 +23,12 @@ class UserServices {
         picture: call.request.picture,
       };
 
-      if (!call.request.id) {
-        throw new NotFoundResponse();
+      if (!user.fullname || !user.email) {
+        throw new InvalidArgumentGRPC();
       }
+
+      const newUser = await userModels.createUser(user);
+      console.log(newUser);
 
       return { user };
     });

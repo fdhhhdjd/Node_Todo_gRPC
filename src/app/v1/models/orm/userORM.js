@@ -1,3 +1,4 @@
+const { randomHelpers } = require("@/helpers");
 const { Model, DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -40,10 +41,7 @@ module.exports = (sequelize) => {
       underscored: true,
       hooks: {
         beforeCreate: async (user) => {
-          console.log(user, "create");
-        },
-        beforeUpdate: async (user) => {
-          console.log(user, "update");
+          user.picture = randomHelpers.generateAvatar(user.fullname);
         },
       },
     },
