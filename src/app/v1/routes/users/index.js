@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.get("/:userId", AsyncHandler(userControllers.GetUserDetail));
 
+router.post("/", AsyncHandler(userControllers.CreateUser));
+
 module.exports = router;

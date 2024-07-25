@@ -18,6 +18,7 @@ message GetUserRequest {
 message CreateUserRequest {
     string fullname = 1;
     string email = 2;
+    string picture = 3;
 }
 
 message UpdateUserRequest {

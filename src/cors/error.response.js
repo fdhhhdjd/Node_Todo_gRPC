@@ -1,6 +1,7 @@
-const reasonPhrases = require('@/utils/reasonPhrases');
-const statusCodes = require('@/utils/statusCodes');
-const errorCodes = require('@/utils/errorCode');
+const reasonPhrases = require("@/utils/reasonPhrases");
+const statusCodes = require("@/utils/statusCodes");
+const errorCodes = require("@/utils/errorCode");
+const { checkStringHelpers } = require("@/helpers");
 
 class ErrorResponse extends Error {
   constructor(message, status, code, details) {
@@ -8,7 +9,9 @@ class ErrorResponse extends Error {
     this.status = status;
     this.code = code;
     this.timestamp = new Date().toISOString();
-    this.details = details || [];
+    this.details = checkStringHelpers.isJSONString(details)
+      ? JSON.parse(details)
+      : details || [];
   }
 }
 

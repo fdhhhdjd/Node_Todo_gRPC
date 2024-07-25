@@ -1,3 +1,4 @@
 module.exports = {
-  appHelpers: require('./appHelpers'),
+  appHelpers: require("./appHelpers"),
+  checkStringHelpers: require("./checkStringHelpers"),
 };

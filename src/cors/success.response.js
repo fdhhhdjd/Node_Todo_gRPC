@@ -1,4 +1,4 @@
-const statusCodes = require('@/utils/statusCodes');
+const statusCodes = require("@/utils/statusCodes");
 
 class SuccessResponse {
   constructor({ message, status, metadata = {} }) {
@@ -13,7 +13,24 @@ class SuccessResponse {
 }
 
 class Ok extends SuccessResponse {
-  constructor({ message, status = statusCodes.OK, metadata = {}, options = {} } = {}) {
+  constructor({
+    message,
+    status = statusCodes.OK,
+    metadata = {},
+    options = {},
+  } = {}) {
+    super({ message, status, metadata });
+    this.options = options;
+  }
+}
+
+class Created extends SuccessResponse {
+  constructor({
+    message,
+    status = statusCodes.CREATED,
+    metadata = {},
+    options = {},
+  } = {}) {
     super({ message, status, metadata });
     this.options = options;
   }
@@ -21,4 +38,5 @@ class Ok extends SuccessResponse {
 
 module.exports = {
   Ok,
+  Created,
 };
