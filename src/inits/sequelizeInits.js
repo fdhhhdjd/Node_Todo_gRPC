@@ -1,4 +1,6 @@
 const { Sequelize } = require("sequelize");
+const pg = require("pg");
+const types = require("pg-types");
 const {
   pgConfigs: {
     pg: { user, host, database, password, port },
@@ -6,6 +8,9 @@ const {
 } = require("@/configs");
 const { appConstants, timeConstants, pgConstants } = require("@/constants");
 const { appHelpers } = require("@/helpers");
+
+// Override BIGINT type to return a number instead of string
+types.setTypeParser(20, (val) => parseInt(val, 10));
 
 class DatabaseManager {
   constructor() {
@@ -56,6 +61,7 @@ class DatabaseManager {
       host: host,
       port: port,
       dialect: pgConstants.DIALECT[0],
+      dialectModule: pg,
       dialectOptions: {
         ssl: {
           require: true,
@@ -72,6 +78,13 @@ class DatabaseManager {
         ? // ? console.log
           false
         : false,
+      define: {
+        // This option ensures that the table names are not pluralized
+        freezeTableName: true,
+        // This option ensures that the default timestamp fields (createdAt, updatedAt) are used
+        timestamps: true,
+      },
+      typeValidation: true, // Ensures that the data types used are valid
     });
 
     this.client.instanceConnect = sequelizeInstance;

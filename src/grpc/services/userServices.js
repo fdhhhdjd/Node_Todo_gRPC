@@ -3,15 +3,17 @@ const { InvalidArgumentGRPC } = require("@/cors");
 const { ErrorHandlerGRPC } = require("@/utils");
 
 class UserServices {
+  async GetAllUsers(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const users = await userModels.getAllUsers();
+      return { users };
+    });
+  }
+
   async GetUser(call, callback) {
     ErrorHandlerGRPC.handleRequest(call, callback, async () => {
-      const user = {
-        id: call.request.id,
-        fullname: "Nguyen Tien Tai",
-        email: "nguyentientai10@gmail.com",
-        picture: "ádasdasdasdas",
-      };
-      return { user };
+      const getUserId = await userModels.getUserById(call.request.id);
+      return { user: getUserId };
     });
   }
 
@@ -28,9 +30,15 @@ class UserServices {
       }
 
       const newUser = await userModels.createUser(user);
-      console.log(newUser);
 
-      return { user };
+      return {
+        user: {
+          id: newUser.id,
+          fullname: newUser.fullname,
+          email: newUser.email,
+          picture: newUser.picture,
+        },
+      };
     });
   }
 }
