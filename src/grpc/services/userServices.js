@@ -41,6 +41,26 @@ class UserServices {
       };
     });
   }
+
+  async UpdateUser(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const user = {
+        fullname: call.request.fullname,
+        email: call.request.email,
+        picture: call.request.picture,
+      };
+
+      const updateUser = await userModels.updateUser(call.request.id, user);
+      return {
+        user: {
+          id: updateUser.id,
+          fullname: updateUser.fullname,
+          email: updateUser.email,
+          picture: updateUser.picture,
+        },
+      };
+    });
+  }
 }
 
 module.exports = new UserServices();

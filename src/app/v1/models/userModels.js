@@ -20,15 +20,19 @@ class UserModels {
   }
 
   async createUser(data) {
-    return this.User.create(data).catch((error) =>
-      ErrorHandlerPg.handlePostgresError(error),
-    );
+    return this.User.create(data, {
+      attributes: ["id", "fullname", "email", "picture"],
+    }).catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
   async updateUser(id, data) {
-    return await this.User.update(data, { where: { id } }).catch((error) =>
-      ErrorHandlerPg.handlePostgresError(error),
-    );
+    return await this.User.update(data, {
+      where: { id },
+      returning: true,
+      individualHooks: true,
+    })
+      .then(([_, [updatedUser]]) => updatedUser)
+      .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
   async deleteUser(id) {

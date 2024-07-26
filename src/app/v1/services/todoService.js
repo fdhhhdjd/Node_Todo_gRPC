@@ -6,7 +6,6 @@ class TodoServices {
     return new Promise((resolve, reject) => {
       todoClient.GetTodo({ id }, (err, response) => {
         if (!err) {
-          console.log(response)
           resolve(response.todo);
         } else {
           reject(new BadRequestResponse({ details: err }));

@@ -11,5 +11,6 @@ router.get("/:userId", AsyncHandler(userControllers.GetUserDetail));
 
 //* POST
 router.post("/", AsyncHandler(userControllers.CreateUser));
+router.post("/:userId", AsyncHandler(userControllers.UpdateUser));
 
 module.exports = router;

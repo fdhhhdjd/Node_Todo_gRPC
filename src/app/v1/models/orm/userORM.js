@@ -43,6 +43,11 @@ module.exports = (sequelize) => {
         beforeCreate: async (user) => {
           user.picture = randomHelpers.generateAvatar(user.fullname);
         },
+        beforeUpdate: async (user) => {
+          if (!user.picture) {
+            user.picture = randomHelpers.generateAvatar(user.fullname);
+          }
+        },
       },
     },
   );

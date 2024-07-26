@@ -41,6 +41,25 @@ class UserServices {
     });
     return response;
   }
+
+  async UpdateUser(id, body) {
+    const { fullname, email, picture } = body;
+    const response = await new Promise((resolve, reject) => {
+      userClient.UpdateUser(
+        { id, fullname, email, picture },
+        (err, response) => {
+          if (err)
+            reject(
+              new BadRequestResponse({
+                details: err.details,
+              }),
+            );
+          else resolve(response.user);
+        },
+      );
+    });
+    return response;
+  }
 }
 
 module.exports = new UserServices();
