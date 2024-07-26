@@ -3,36 +3,36 @@ syntax = "proto3";
 package todo;
 
 message TodoItem {
-    int32 id = 1;
+    int64 id = 1;
     string title = 2;
     string description = 3;
     bool completed = 4;
-    int32 user_id = 5;
+    int64 user_id = 5;
 }
 
 message GetTodoRequest {
-    int32 id = 1;
+    int64 id = 1;
 }
 
 message GetTodosByUserRequest {
-    int32 user_id = 1;
+    int64 user_id = 1;
 }
 
 message CreateTodoRequest {
     string title = 1;
     string description = 2;
-    int32 user_id = 3;
+    int64 user_id = 3;
 }
 
 message UpdateTodoRequest {
-    int32 id = 1;
+    int64 id = 1;
     string title = 2;
     string description = 3;
     bool completed = 4;
 }
 
 message DeleteTodoRequest {
-    int32 id = 1;
+    int64 id = 1;
 }
 
 message TodoResponse {

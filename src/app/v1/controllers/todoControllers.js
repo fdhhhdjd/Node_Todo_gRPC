@@ -8,6 +8,11 @@ class TodoControllers {
       metadata: await todoServices.getTodoDetail({ id: todoId }),
     }).send(res);
   }
+  async createTodo(req, res) {
+    new Ok({
+      metadata: await todoServices.createTodo(req.body),
+    }).send(res);
+  }
 }
 
 module.exports = new TodoControllers();

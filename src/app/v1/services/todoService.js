@@ -13,6 +13,25 @@ class TodoServices {
       });
     });
   }
+
+  async createTodo(req) {
+    const { title, description, user_id } = req;
+    const response = await new Promise((resolve, reject) => {
+      todoClient.CreateTodo(
+        { title, description, user_id },
+        (err, response) => {
+          if (err)
+            reject(
+              new BadRequestResponse({
+                details: err.details,
+              }),
+            );
+          else resolve(response.todo);
+        },
+      );
+    });
+    return response;
+  }
 }
 
 module.exports = new TodoServices();

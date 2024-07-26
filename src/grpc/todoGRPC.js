@@ -6,6 +6,10 @@ const {
     todoGRPC: { port },
   },
 } = require("@/configs");
+
+//* GLOBAL
+require("@/globals");
+
 const todoService = require("./services/todoService");
 const { todoProto } = require("@/protos");
 
