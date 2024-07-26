@@ -10,16 +10,21 @@ const {
 //* GLOBAL
 require("@/globals");
 
-const todoService = require("./services/todoService");
 const { todoProto } = require("@/protos");
 
-const todoGRPCServer = new grpc.Server({
-  "grpc.max_send_message_length": -1,
-  "grpc.max_receive_message_length": -1,
-});
+const getServer = () => {
+  const todoGRPCServer = new grpc.Server({
+    "grpc.max_send_message_length": -1,
+    "grpc.max_receive_message_length": -1,
+  });
+  todoGRPCServer.addService(
+    todoProto.TodoService.service,
+    require("./services/todoService"),
+  );
+  return todoGRPCServer;
+};
 
-// Add user service
-todoGRPCServer.addService(todoProto.TodoService.service, todoService);
+const todoGRPCServer = getServer();
 
 // Start the server
 todoGRPCServer.bindAsync(

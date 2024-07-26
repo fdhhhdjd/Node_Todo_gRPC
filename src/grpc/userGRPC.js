@@ -12,16 +12,22 @@ const { userProto } = require("@/protos");
 //* GLOBAL
 require("@/globals");
 
-const userGRPCServer = new grpc.Server({
-  "grpc.max_send_message_length": -1,
-  "grpc.max_receive_message_length": -1,
-});
+const getServer = () => {
+  const userGRPCServer = new grpc.Server({
+    "grpc.max_send_message_length": -1,
+    "grpc.max_receive_message_length": -1,
+  });
 
-// Add user service with interceptor
-userGRPCServer.addService(
-  userProto.UserService.service,
-  require("./services/userServices"),
-);
+  // Add user service with interceptor
+  userGRPCServer.addService(
+    userProto.UserService.service,
+    require("./services/userServices"),
+  );
+
+  return userGRPCServer;
+};
+
+const userGRPCServer = getServer();
 
 // Start the server
 userGRPCServer.bindAsync(

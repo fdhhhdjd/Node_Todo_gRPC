@@ -9,6 +9,7 @@
     "user": "node --watch  src/grpc/userGRPC.js",
     "todo": "node --watch  src/grpc/todoGRPC.js",
     "format": "prettier --write src/**/*.{js,jsx}",
+    "test": "node --watch src/tests/streamingTests.js",
     "prepare": "husky install",
     "pre-commit": "echo \"[Husky] pre-commit\"",
     "lint-staged": "lint-staged"

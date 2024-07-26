@@ -57,6 +57,17 @@ class TodoServices {
       return { todo: updatedTodo };
     });
   }
+
+  async streamData(call) {
+    call.on("data", (request) => {
+      console.log("Received request:", request.message);
+      call.write({ message: `Echo: Ok` });
+    });
+
+    call.on("end", () => {
+      call.end();
+    });
+  }
 }
 
 module.exports = new TodoServices();

@@ -54,10 +54,21 @@ message TodosResponse {
     repeated TodoItem todos = 1;
 }
 
+//* Streaming
+  message Request {
+    string message = 1;
+  }
+  
+  message Response {
+    string message = 1;
+  }
+
 service TodoService {
     rpc CreateTodo (CreateTodoRequest) returns (TodoResponse);
     rpc GetTodo (GetTodoRequest) returns (TodoResponse);
     rpc GetTodosByUser (GetTodosByUserRequest) returns (TodosResponse);
     rpc UpdateTodo (UpdateTodoRequest) returns (TodoResponse);
     rpc DeleteTodo (DeleteTodoRequest) returns (TodoResponse);
+    //* Streaming
+    rpc StreamData(stream Request) returns (stream Response);
 }
