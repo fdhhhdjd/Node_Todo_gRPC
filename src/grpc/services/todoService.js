@@ -4,14 +4,10 @@ const { ErrorHandlerGRPC } = require("@/utils");
 
 class TodoServices {
   async GetTodo(call, callback) {
-    const todo = {
-      id: call.request.id,
-      title: "Hello",
-      description: "This is todo example",
-      user_id: 1,
-    };
-
-    callback(null, { todo });
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const getTodoId = await todoModels.getTodoWithUser(call.request.id);
+      return { todo: getTodoId };
+    });
   }
 
   async CreateTodo(call, callback) {

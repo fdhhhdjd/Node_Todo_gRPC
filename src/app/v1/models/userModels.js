@@ -2,10 +2,14 @@
 
 const { initPg } = require("@/inits");
 const { ErrorHandlerPg } = require("@/utils");
+const User = require("@/app/v1/models/orm/userORM")(initPg.getDatabase());
+const Todo = require("@/app/v1/models/orm/todoORM")(initPg.getDatabase());
+
+User.associate({ Todo });
 
 class UserModels {
   constructor() {
-    this.User = require("@/app/v1/models/orm/userORM")(initPg.getDatabase());
+    this.User = User;
   }
   async getAllUsers() {
     return await this.User.findAll({

@@ -45,7 +45,6 @@ class DatabaseManager {
       const Todo = require("@/app/v1/models/orm/todoORM")(
         this.client.instanceConnect,
       );
-
       User.associate({ Todo });
       Todo.associate({ User });
 

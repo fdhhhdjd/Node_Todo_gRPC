@@ -4,6 +4,7 @@ const errorReasonsPG = require("./codes/errorReasonsPg");
 
 class ErrorHandlerPG {
   static handlePostgresError(error) {
+    console.log(error);
     const code = error.parent.code || "";
 
     const description = Object.keys(responseCodesPG).find(

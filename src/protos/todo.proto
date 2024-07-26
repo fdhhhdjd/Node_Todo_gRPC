@@ -1,6 +1,15 @@
 syntax = "proto3";
 
+
 package todo;
+
+message User {
+    int64 id = 1;
+    string fullname = 2;
+    string email = 3;
+    string picture = 4;
+}
+
 
 message TodoItem {
     int64 id = 1;
@@ -8,6 +17,7 @@ message TodoItem {
     string description = 3;
     bool completed = 4;
     int64 user_id = 5;
+    User user = 6; // Add the User object here
 }
 
 message GetTodoRequest {
