@@ -8,8 +8,53 @@
 </p>
 
 # Description
-This project simple used in work teacher for class fullstack of teacher.
+## This project simple used in work teacher for class fullstack of teacher.
 
+
+# Structure 
+
+```
+.dockerignore          # Docker ignore file
+.editorconfig          # Editor configuration file
+.env                   # Environment variables file
+.env.example           # Example environment variables file
+.gitignore             # Git ignore file
+.husky/                # Husky configuration directory
+.vscode/               # Visual Studio Code configuration directory
+    settings.json      # VSCode settings file
+combined.log           # Combined log file
+commitlint.config.js   # Commit lint configuration file
+docker/                # Docker configuration directory
+    dev/               # Development Docker configuration
+docker-compose.dev.yml # Docker Compose configuration for development
+docs/                  # Documentation directory
+    REDIS.md           # Redis documentation
+jsconfig.json          # JavaScript configuration file
+makefile               # Makefile for build automation
+package.json           # NPM package configuration file
+README.md              # Project README file
+server.js              # Main server file
+src/                   # Source code directory
+    app/               # Application code
+        v1/            # Version 1 of the application
+            models/       # Data models
+                orm/      # ORM (Object-Relational Mapping) files
+            services/     # Service layer
+            controllers/  # Controllers
+    configs/           # Configuration files
+    constants/         # Constants used in the project
+    cors/              # CORS (Cross-Origin Resource Sharing) configuration
+    globals/           # Global variables and configurations
+    grpc/              # gRPC (Google Remote Procedure Call) related files
+    helpers/           # Helper functions and utilities
+    inits/             # Initialization scripts
+    loggers/           # Logging utilities
+    middlewares/       # Middleware functions
+    protos/            # Protocol buffer files
+    tests/             # Test files
+    utils/             # Utility functions
+    views/             # View templates
+```
 
 ## Tài Khoản Donate li Cf để có động lực code cho anh em tham khảo 😄😄
 
