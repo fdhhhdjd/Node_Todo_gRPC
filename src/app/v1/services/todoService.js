@@ -32,6 +32,25 @@ class TodoServices {
     });
     return response;
   }
+
+  async updateTodo(id, req) {
+    const { title, description, completed, user_id } = req;
+    const response = await new Promise((resolve, reject) => {
+      todoClient.UpdateTodo(
+        { id, title, description, completed, user_id },
+        (err, response) => {
+          if (err)
+            reject(
+              new BadRequestResponse({
+                details: err.details,
+              }),
+            );
+          else resolve(response.todo);
+        },
+      );
+    });
+    return response;
+  }
 }
 
 module.exports = new TodoServices();

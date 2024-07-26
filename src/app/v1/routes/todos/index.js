@@ -10,5 +10,6 @@ router.get("/:todoId", AsyncHandler(todoControllers.getTodoDetail));
 
 //* POST
 router.post("/", AsyncHandler(todoControllers.createTodo));
+router.post("/:todoId", AsyncHandler(todoControllers.updateTodo));
 
 module.exports = router;

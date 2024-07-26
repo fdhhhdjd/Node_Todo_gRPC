@@ -35,6 +35,28 @@ class TodoServices {
       };
     });
   }
+
+  async UpdateTodo(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const todo = {
+        title: call.request.title,
+        description: call.request.description,
+        completed: call.request.completed,
+        user_id: call.request.user_id,
+      };
+
+      const { numberOfUpdateRows, updatedTodo } = await todoModels.updateTodo(
+        call.request.id,
+        todo,
+      );
+
+      if (numberOfUpdateRows === 0) {
+        throw new InvalidArgumentGRPC();
+      }
+
+      return { todo: updatedTodo };
+    });
+  }
 }
 
 module.exports = new TodoServices();

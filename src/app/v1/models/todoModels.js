@@ -1,3 +1,4 @@
+const { fieldHelpers } = require("@/helpers");
 const { initPg } = require("@/inits");
 const { ErrorHandlerPg } = require("@/utils");
 const User = require("@/app/v1/models/orm/userORM")(initPg.getDatabase());
@@ -30,6 +31,18 @@ class TodoModels {
       ],
     })
       .then((todo) => todo)
+      .catch((error) => ErrorHandlerPg.handlePostgresError(error));
+  }
+
+  async updateTodo(id, data) {
+    const filteredTodo = fieldHelpers.filterTodo(data);
+    return await this.Todo.update(filteredTodo, {
+      where: { id },
+      returning: true,
+    })
+      .then(([numberOfUpdateRows, [updatedTodo]]) => {
+        return { numberOfUpdateRows, updatedTodo };
+      })
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 }
