@@ -13,4 +13,7 @@ router.get("/:userId", AsyncHandler(userControllers.GetUserDetail));
 router.post("/", AsyncHandler(userControllers.CreateUser));
 router.post("/:userId", AsyncHandler(userControllers.UpdateUser));
 
+//* DELETE
+router.delete("/:userId", AsyncHandler(userControllers.DeleteUser));
+
 module.exports = router;

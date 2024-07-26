@@ -22,11 +22,9 @@ class ErrorHandlerPG {
         message: description,
       });
     }
-    return {
-      code,
+    throw new InvalidArgumentGRPC({
       description: "Unknown error",
-      reason,
-    };
+    });
   }
 }
 

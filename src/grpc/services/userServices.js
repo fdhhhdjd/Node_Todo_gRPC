@@ -50,13 +50,38 @@ class UserServices {
         picture: call.request.picture,
       };
 
-      const updateUser = await userModels.updateUser(call.request.id, user);
+      const { numberOfUpdateRows, updatedUser } = await userModels.updateUser(
+        call.request.id,
+        user,
+      );
+
+      if (numberOfUpdateRows === 0) {
+        throw new InvalidArgumentGRPC();
+      }
+
       return {
         user: {
-          id: updateUser.id,
-          fullname: updateUser.fullname,
-          email: updateUser.email,
-          picture: updateUser.picture,
+          id: updatedUser.id,
+          fullname: updatedUser.fullname,
+          email: updatedUser.email,
+          picture: updatedUser.picture,
+        },
+      };
+    });
+  }
+
+  async DeleteUser(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const { numberOfDeletedRows } = await userModels.deleteUser(
+        call.request.id,
+      );
+
+      if (numberOfDeletedRows === 0) {
+        throw new InvalidArgumentGRPC();
+      }
+      return {
+        user: {
+          id: call.request.id,
         },
       };
     });

@@ -10,7 +10,6 @@ router.get("/", async (_, res) => {
     uptime: process.uptime(),
     message: "Ok",
     timestamp: Date.now(),
-    cacheTest: resultCacheTest || "anonymous",
   };
   return res.status(StatusCodes.OK).send(healthCheck);
 });

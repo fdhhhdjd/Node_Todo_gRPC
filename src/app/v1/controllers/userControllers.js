@@ -2,7 +2,7 @@ const { Ok, Created } = require("@/cors");
 const userServices = require("@/app/v1/services/userServices");
 
 class UserControllers {
-  async GetAllUsers(req, res) {
+  async GetAllUsers(_, res) {
     new Ok({
       metadata: await userServices.GetAllUsers(),
     }).send(res);
@@ -25,6 +25,13 @@ class UserControllers {
     const userId = req.params.userId;
     new Ok({
       metadata: await userServices.UpdateUser(userId, req.body),
+    }).send(res);
+  }
+
+  async DeleteUser(req, res) {
+    const userId = req.params.userId;
+    new Ok({
+      metadata: await userServices.DeleteUser(userId),
     }).send(res);
   }
 }

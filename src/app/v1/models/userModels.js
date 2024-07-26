@@ -31,14 +31,21 @@ class UserModels {
       returning: true,
       individualHooks: true,
     })
-      .then(([_, [updatedUser]]) => updatedUser)
+      .then(([numberOfUpdateRows, [updatedUser]]) => {
+        return { numberOfUpdateRows, updatedUser };
+      })
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
   async deleteUser(id) {
-    return await this.User.destroy({ where: { id } }).catch((error) =>
-      ErrorHandlerPg.handlePostgresError(error),
-    );
+    return this.User.destroy({
+      where: { id },
+      returning: true,
+    })
+      .then((numberOfDeletedRows) => {
+        return { numberOfDeletedRows };
+      })
+      .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 }
 

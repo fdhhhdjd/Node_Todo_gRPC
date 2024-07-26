@@ -11,6 +11,10 @@ message User {
     string picture = 4;
 }
 
+message UserId {
+    int64 id = 1; 
+}
+
 message GetUserRequest {
     int64 id = 1; 
 }
@@ -40,10 +44,14 @@ message UsersResponse {
     repeated User users = 1;
 }
 
+message UserDeleteResponse {
+    UserId user = 1;
+}
+
 service UserService {
     rpc CreateUser (CreateUserRequest) returns (UserResponse);
     rpc GetUser (GetUserRequest) returns (UserResponse);
     rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
-    rpc DeleteUser (DeleteUserRequest) returns (UserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (UserDeleteResponse);
     rpc GetAllUsers (google.protobuf.Empty) returns (UsersResponse);
 }

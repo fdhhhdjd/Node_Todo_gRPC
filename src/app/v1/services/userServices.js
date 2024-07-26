@@ -60,6 +60,21 @@ class UserServices {
     });
     return response;
   }
+
+  async DeleteUser(id) {
+    const response = await new Promise((resolve, reject) => {
+      userClient.DeleteUser({ id }, (err, response) => {
+        if (err)
+          reject(
+            new BadRequestResponse({
+              details: err.details,
+            }),
+          );
+        else resolve(response.user);
+      });
+    });
+    return response;
+  }
 }
 
 module.exports = new UserServices();
