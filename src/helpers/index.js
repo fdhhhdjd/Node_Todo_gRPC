@@ -3,4 +3,5 @@ module.exports = {
   checkStringHelpers: require("./checkStringHelpers"),
   randomHelpers: require("./randomHelper"),
   fieldHelpers: require("./fieldHelpers"),
+  loadFileHelpers: require("./loadFileHelpers"),
 };
