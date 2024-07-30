@@ -20,6 +20,10 @@ message TodoItem {
     User user = 6; // Add the User object here
 }
 
+message TodoId {
+    int64 id = 1; 
+}
+
 message GetTodoRequest {
     int64 id = 1;
 }
@@ -54,21 +58,28 @@ message TodosResponse {
     repeated TodoItem todos = 1;
 }
 
+message TodoDeleteResponse {
+    TodoId todo = 1;
+}
+
 //* Streaming
-  message Request {
+
+message Request {
     string message = 1;
-  }
-  
-  message Response {
+}
+
+message Response {
     string message = 1;
-  }
+}
 
 service TodoService {
+    //* Todo CRUD
     rpc CreateTodo (CreateTodoRequest) returns (TodoResponse);
     rpc GetTodo (GetTodoRequest) returns (TodoResponse);
     rpc GetTodosByUser (GetTodosByUserRequest) returns (TodosResponse);
     rpc UpdateTodo (UpdateTodoRequest) returns (TodoResponse);
-    rpc DeleteTodo (DeleteTodoRequest) returns (TodoResponse);
+    rpc DeleteTodo (DeleteTodoRequest) returns (TodoDeleteResponse);
+
     //* Streaming
     rpc StreamData(stream Request) returns (stream Response);
 }

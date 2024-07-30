@@ -28,6 +28,15 @@ class TodoControllers {
       metadata: await todoServices.updateTodo(todoId, req.body),
     }).send(res);
   }
+
+  async deleteTodo(req, res) {
+    const todoId = req.params.todoId;
+    new Ok({
+      metadata: await todoServices.deleteTodo({
+        id: todoId,
+      }),
+    }).send(res);
+  }
 }
 
 module.exports = new TodoControllers();

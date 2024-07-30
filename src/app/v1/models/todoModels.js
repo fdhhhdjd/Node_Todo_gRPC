@@ -12,10 +12,13 @@ class TodoModels {
     this.Todo = Todo;
   }
 
-  async createTodo(data) {
-    return this.Todo.create(data, {
+  async getTodoByUser(userId) {
+    return this.Todo.findAll({
+      where: { user_id: userId },
       attributes: ["id", "title", "description", "completed", "user_id"],
-    }).catch((error) => ErrorHandlerPg.handlePostgresError(error));
+    })
+      .then((todos) => todos)
+      .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
   async getTodoWithUser(todoId) {
@@ -34,6 +37,12 @@ class TodoModels {
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
+  async createTodo(data) {
+    return this.Todo.create(data, {
+      attributes: ["id", "title", "description", "completed", "user_id"],
+    }).catch((error) => ErrorHandlerPg.handlePostgresError(error));
+  }
+
   async updateTodo(id, data) {
     const filteredTodo = fieldHelpers.filterTodo(data);
     return await this.Todo.update(filteredTodo, {
@@ -46,12 +55,11 @@ class TodoModels {
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 
-  async getTodoByUser(userId) {
-    return this.Todo.findAll({
-      where: { user_id: userId },
-      attributes: ["id", "title", "description", "completed", "user_id"],
+  async deleteTodoById(todoId) {
+    return this.Todo.destroy({
+      where: { id: todoId },
     })
-      .then((todos) => todos)
+      .then((numberOfDeletedRows) => numberOfDeletedRows)
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
 }

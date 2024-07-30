@@ -63,6 +63,21 @@ class TodoServices {
     });
     return response;
   }
+
+  async deleteTodo({ id }) {
+    const response = await new Promise((resolve, reject) => {
+      todoClient.DeleteTodo({ id }, (err, response) => {
+        if (err)
+          reject(
+            new BadRequestResponse({
+              details: err.details,
+            }),
+          );
+        else resolve(response.todo);
+      });
+    });
+    return response;
+  }
 }
 
 module.exports = new TodoServices();

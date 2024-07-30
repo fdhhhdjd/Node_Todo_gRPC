@@ -13,4 +13,7 @@ router.get("/user/:userId", AsyncHandler(todoControllers.getTodoByUser));
 router.post("/", AsyncHandler(todoControllers.createTodo));
 router.post("/:todoId", AsyncHandler(todoControllers.updateTodo));
 
+//* DELETE
+router.delete("/:todoId", AsyncHandler(todoControllers.deleteTodo));
+
 module.exports = router;

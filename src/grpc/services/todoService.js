@@ -67,6 +67,24 @@ class TodoServices {
     });
   }
 
+  async DeleteTodo(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const { numberOfDeletedRows } = await todoModels.deleteTodoById(
+        call.request.id,
+      );
+
+      if (numberOfDeletedRows === 0) {
+        throw new InvalidArgumentGRPC();
+      }
+
+      return {
+        todo: {
+          id: call.request.id,
+        },
+      };
+    });
+  }
+
   async streamData(call) {
     call.on("data", (request) => {
       console.log("Received request:", request.message);
