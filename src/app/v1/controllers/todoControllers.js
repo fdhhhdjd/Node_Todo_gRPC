@@ -9,6 +9,13 @@ class TodoControllers {
     }).send(res);
   }
 
+  async getTodoByUser(req, res) {
+    const userId = req.params.userId;
+    new Ok({
+      metadata: await todoServices.getTodoByUser({ user_id: userId }),
+    }).send(res);
+  }
+
   async createTodo(req, res) {
     new Created({
       metadata: await todoServices.createTodo(req.body),

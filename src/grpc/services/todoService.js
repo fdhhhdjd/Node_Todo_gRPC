@@ -3,6 +3,15 @@ const { InvalidArgumentGRPC } = require("@/cors");
 const { ErrorHandlerGRPC } = require("@/utils");
 
 class TodoServices {
+  async GetTodosByUser(call, callback) {
+    ErrorHandlerGRPC.handleRequest(call, callback, async () => {
+      const getTodoByUser = await todoModels.getTodoByUser(
+        call.request.user_id,
+      );
+      return { todos: getTodoByUser };
+    });
+  }
+
   async GetTodo(call, callback) {
     ErrorHandlerGRPC.handleRequest(call, callback, async () => {
       const getTodoId = await todoModels.getTodoWithUser(call.request.id);

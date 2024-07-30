@@ -41,7 +41,7 @@ apiRouter.use("/v1", v1Router);
 app.use("/api", apiRouter);
 
 //* STREAMING
-require("@/streamings/subStreamings");
+// require("@/streamings/subStreamings");
 
 //* NOT FOUND 404
 app.use(ErrorCustom.notFoundHandler);

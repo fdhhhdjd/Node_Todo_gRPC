@@ -45,6 +45,15 @@ class TodoModels {
       })
       .catch((error) => ErrorHandlerPg.handlePostgresError(error));
   }
+
+  async getTodoByUser(userId) {
+    return this.Todo.findAll({
+      where: { user_id: userId },
+      attributes: ["id", "title", "description", "completed", "user_id"],
+    })
+      .then((todos) => todos)
+      .catch((error) => ErrorHandlerPg.handlePostgresError(error));
+  }
 }
 
 module.exports = new TodoModels();

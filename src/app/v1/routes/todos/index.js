@@ -7,6 +7,7 @@ const router = express.Router();
 
 //* GET
 router.get("/:todoId", AsyncHandler(todoControllers.getTodoDetail));
+router.get("/user/:userId", AsyncHandler(todoControllers.getTodoByUser));
 
 //* POST
 router.post("/", AsyncHandler(todoControllers.createTodo));

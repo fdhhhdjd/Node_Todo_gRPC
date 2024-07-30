@@ -14,6 +14,18 @@ class TodoServices {
     });
   }
 
+  async getTodoByUser({ user_id }) {
+    return new Promise((resolve, reject) => {
+      todoClient.GetTodosByUser({ user_id }, (err, response) => {
+        if (!err) {
+          resolve(response.todos);
+        } else {
+          reject(new BadRequestResponse({ details: err }));
+        }
+      });
+    });
+  }
+
   async createTodo(req) {
     const { title, description, user_id } = req;
     const response = await new Promise((resolve, reject) => {

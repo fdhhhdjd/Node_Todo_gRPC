@@ -16,6 +16,6 @@ router.get("/", async (_, res) => {
 
 router.use("/users", require("./users"));
 router.use("/todos", require("./todos"));
-router.use("/streamings", require("./streamings"));
+// router.use("/streamings", require("./streamings"));
 
 module.exports = router;
