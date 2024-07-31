@@ -5,7 +5,7 @@ const { initPg } = require("@/inits");
 // require("@/tests/dropTableTests");
 class Globals {
   static async init() {
-    //* PostgreSQL
+    //* POSTGRES SQL
     await initPg.initDatabase();
   }
 }

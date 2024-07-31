@@ -1,4 +1,7 @@
+"use strict";
+
 const todoModels = require("@/app/v1/models/todoModels");
+const { pgConstants } = require("@/constants");
 const { InvalidArgumentGRPC } = require("@/cors");
 const { ErrorHandlerGRPC } = require("@/utils");
 
@@ -59,7 +62,7 @@ class TodoServices {
         todo,
       );
 
-      if (numberOfUpdateRows === 0) {
+      if (numberOfUpdateRows === pgConstants.USER_NOT_EXIT) {
         throw new InvalidArgumentGRPC();
       }
 
@@ -73,7 +76,7 @@ class TodoServices {
         call.request.id,
       );
 
-      if (numberOfDeletedRows === 0) {
+      if (numberOfDeletedRows === pgConstants.USER_NOT_EXIT) {
         throw new InvalidArgumentGRPC();
       }
 

@@ -1,4 +1,6 @@
-const EventBus = require("./index");
+"use strict";
+
+const EventBus = require("./");
 
 const ListenEvents = () => {
   EventBus.onTodoAdded("messageAdded", (message) => {

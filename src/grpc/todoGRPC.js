@@ -1,3 +1,5 @@
+"use strict";
+
 require("module-alias/register");
 
 const grpc = require("@grpc/grpc-js");
@@ -11,11 +13,12 @@ const {
 require("@/globals");
 
 const { todoProto } = require("@/protos");
+const { appConstants } = require("@/constants");
 
 const getServer = () => {
   const todoGRPCServer = new grpc.Server({
-    "grpc.max_send_message_length": -1,
-    "grpc.max_receive_message_length": -1,
+    "grpc.max_send_message_length": appConstants.NOT_SIZE_LIMIT,
+    "grpc.max_receive_message_length": appConstants.NOT_SIZE_LIMIT,
   });
   todoGRPCServer.addService(
     todoProto.TodoService.service,
@@ -28,7 +31,7 @@ const todoGRPCServer = getServer();
 
 // Start the server
 todoGRPCServer.bindAsync(
-  `0.0.0.0:${port}`,
+  `${appConstants.HOST_EVERY_WHERE}:${port}`,
   grpc.ServerCredentials.createInsecure(),
   () => {
     console.info(`gRPC server listening on port ${port}`);

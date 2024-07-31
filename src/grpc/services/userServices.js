@@ -1,4 +1,7 @@
+"use strict";
+
 const userModels = require("@/app/v1/models/userModels");
+const { pgConstants } = require("@/constants");
 const { InvalidArgumentGRPC } = require("@/cors");
 const { ErrorHandlerGRPC } = require("@/utils");
 
@@ -55,7 +58,7 @@ class UserServices {
         user,
       );
 
-      if (numberOfUpdateRows === 0) {
+      if (numberOfUpdateRows === pgConstants.USER_NOT_EXIT) {
         throw new InvalidArgumentGRPC();
       }
 
@@ -76,7 +79,7 @@ class UserServices {
         call.request.id,
       );
 
-      if (numberOfDeletedRows === 0) {
+      if (numberOfDeletedRows === pgConstants.USER_NOT_EXIT) {
         throw new InvalidArgumentGRPC();
       }
       return {

@@ -1,3 +1,5 @@
+"use strict";
+
 const EventEmitter = require("events");
 
 class EventBus extends EventEmitter {
@@ -9,4 +11,5 @@ class EventBus extends EventEmitter {
     this.on(key, listener);
   }
 }
+
 module.exports = new EventBus();
