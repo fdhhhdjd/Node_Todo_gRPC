@@ -12,6 +12,8 @@ const LoadFile = require("@/helpers/loadFileHelpers");
 //* Load File Protos
 const protoDir = path.join(__dirname, "..", "protos");
 const protos = LoadFile.loadProtos(protoDir);
+
+//* Get proto flow service
 const userProto = protos.user;
 const todoProto = protos.todo;
 
