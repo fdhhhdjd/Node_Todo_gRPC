@@ -43,6 +43,9 @@ app.use("/api", apiRouter);
 //* STREAMING
 // require("@/streamings/subStreamings");
 
+//* EVENT BUS
+require("@/events/listenEvents");
+
 //* NOT FOUND 404
 app.use(ErrorCustom.notFoundHandler);
 
