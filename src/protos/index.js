@@ -1,5 +1,4 @@
 const grpc = require("@grpc/grpc-js");
-const protoLoader = require("@grpc/proto-loader");
 const path = require("path");
 
 const {
@@ -8,30 +7,14 @@ const {
     userGRPC: { port: userPort },
   },
 } = require("@/configs");
+const LoadFile = require("@/helpers/loadFileHelpers");
 
-const userProtoPath = path.join(__dirname, "user.proto");
-const todoProtoPath = path.join(__dirname, "todo.proto");
+const protoDir = path.join(__dirname, "..", "protos");
 
-//* Users
-const userPackageDef = protoLoader.loadSync(userProtoPath, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
+const protos = LoadFile.loadProtos(protoDir);
 
-//* Todo
-const todoPackageDef = protoLoader.loadSync(todoProtoPath, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
-
-const userProto = grpc.loadPackageDefinition(userPackageDef).user;
-const todoProto = grpc.loadPackageDefinition(todoPackageDef).todo;
+const userProto = protos.user;
+const todoProto = protos.todo;
 
 const userClient = new userProto.UserService(
   `localhost:${userPort}`,

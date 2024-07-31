@@ -1,9 +1,9 @@
-const { client } = require("@/streamings/subStreamings");
+const { todoClient } = require("@/protos");
 
 class StreamingService {
   async getStreamingService(req) {
     const { message } = req;
-    const call = client.streamData();
+    const call = todoClient.streamData();
 
     call.write({ message });
 
