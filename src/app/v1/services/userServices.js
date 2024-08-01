@@ -1,3 +1,5 @@
+"use strict";
+
 const { BadRequestResponse } = require("@/cors/error.response");
 const { userClient } = require("@/protos");
 

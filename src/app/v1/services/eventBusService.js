@@ -1,3 +1,5 @@
+"use strict";
+
 const EventBus = require("@/events");
 
 class EventService {

@@ -1,3 +1,5 @@
+"use strict";
+
 const { Ok, Created } = require("@/cors");
 const userServices = require("@/app/v1/services/userServices");
 

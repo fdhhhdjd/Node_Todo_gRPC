@@ -1,3 +1,5 @@
+"use strict";
+
 const { Ok } = require("@/cors");
 const eventBusServices = require("../services/eventBusService");
 

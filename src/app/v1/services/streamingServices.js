@@ -1,3 +1,5 @@
+"use strict";
+
 const { todoClient } = require("@/protos");
 
 class StreamingService {

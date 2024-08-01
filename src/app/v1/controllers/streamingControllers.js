@@ -1,3 +1,5 @@
+"use strict";
+
 const { Ok } = require("@/cors");
 const streamingServices = require("../services/streamingServices");
 
