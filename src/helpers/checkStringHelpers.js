@@ -1,12 +1,14 @@
-const isJSONString = (str) => {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
+"use strict";
 
-module.exports = {
-  isJSONString,
-};
+class CheckStringHelpers {
+  static isJSONString(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+}
+
+module.exports = CheckStringHelpers;

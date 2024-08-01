@@ -1,3 +1,5 @@
+"use strict";
+
 class FieldHelpers {
   static filterTodo = (todo) => {
     const filteredTodo = {};
