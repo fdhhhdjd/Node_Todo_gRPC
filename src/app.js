@@ -11,6 +11,7 @@ require("dotenv").config();
 //* REQUIRE
 const { ErrorCustom } = require("@/utils");
 const { appHelpers } = require("@/helpers");
+const { SignatureVerifier } = require("@/middlewares");
 
 //* USED LIB
 const app = express();
@@ -29,6 +30,9 @@ app.use(
 
 //* GLOBAL
 require("@/globals");
+
+//* MIDDLEWARES
+app.use(SignatureVerifier.verifySignature);
 
 //* GROUP VERSION
 const apiRouter = express.Router();

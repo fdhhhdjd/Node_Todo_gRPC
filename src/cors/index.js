@@ -9,6 +9,7 @@ module.exports = {
   //* Error
   BadRequest: require("./error.response").BadRequestResponse,
   NotFound: require("./error.response").NotFoundError,
+  Unauthorized: require("./error.response").UnauthorizedResponse,
 
   // Todo: --------- GRPC ---------
   NotFoundGRPC: require("./errorGRPC.response").NotFoundGRPC,

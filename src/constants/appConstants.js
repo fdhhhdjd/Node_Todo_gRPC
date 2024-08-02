@@ -4,6 +4,7 @@ const appConstants = {
   HOST_EVERY_WHERE: "0.0.0.0",
   PORT: 5000,
   NOT_SIZE_LIMIT: -1,
+  VERSIONS: ["v1", "v2"],
 };
 
 module.exports = appConstants;
