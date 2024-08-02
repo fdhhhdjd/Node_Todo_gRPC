@@ -1,30 +1,35 @@
 const axios = require("axios");
 const crypto = require("crypto");
+const {
+  appConfigs: {
+    app: { keySecretV1 },
+  },
+} = require("@/configs");
 
-const secretKey = "your_secret_key_v1"; // Khóa bí mật để tạo signature
-const apiUrl = "http://localhost:5000/api/v1"; // URL của API
+const secretKey = keySecretV1;
+const apiUrl = "http://localhost:5000/api/v1"; // URL of API
 
-// Hàm để tạo và gửi request
+// Func create and send request
 const callSecureApi = async () => {
-  // Tạo nonce ngẫu nhiên
+  // Create nonce random
   const nonce = crypto.randomBytes(16).toString("hex");
 
-  // Lấy timestamp hiện tại (tính bằng giây kể từ Epoch)
+  // Get current timestamp (in seconds since Epoch)
   const timestamp = Math.floor(Date.now() / 1000).toString();
 
-  const apiKey = "xxx-yyy"; // API key của bạn
+  const apiKey = "xxx-yyy"; // API key of you
 
-  // Tạo baseString từ nonce, timestamp và requestBody
+  // Create baseString from nonce, timestamp, and api key to verify the signature
   const baseString = nonce + timestamp + apiKey;
 
-  // Tạo signature bằng cách sử dụng HMAC SHA256
+  // Create signature using HMAC SHA256
   const signature = crypto
     .createHmac("sha256", secretKey)
     .update(baseString)
     .digest("hex");
 
   try {
-    // Gửi request với Axios
+    // Send request with Axios
     const response = await axios.get(apiUrl, {
       headers: {
         signature: signature,
@@ -43,5 +48,5 @@ const callSecureApi = async () => {
   }
 };
 
-// Gọi hàm để thực hiện API call
+// Call request to API
 callSecureApi();
